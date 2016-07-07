@@ -60,7 +60,7 @@ namespace MyServices
         {
             bool result = true;
             errorlog ="";
-            result = saveRecords(ConnectionString, dt, out errorlog);
+            result = saveRecords(ConnectionString, dt, out errorlog); 
             if (result)
             {
                 foreach (DataRow row in dt.Rows)
@@ -284,7 +284,7 @@ namespace MyServices
             SqlConnection conn = new SqlConnection(ConnectionString);
             SqlDataAdapter dataAdap = new SqlDataAdapter();
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "Select * from att_records Where record_date BETWEEN" + fromDate.Date.ToString("yyyy-MM-dd") + " AND " + toDate.Date.ToString("yyyy-MM-dd") + " order by record_id";
+            cmd.CommandText = "Select * from att_records Where record_date BETWEEN '" + fromDate.Date.ToString("yyyy-MM-dd") + "' AND '" + toDate.Date.ToString("yyyy-MM-dd") + "' order by record_id";
             dataAdap.SelectCommand = cmd;
             DataSet ds = new DataSet();
 
