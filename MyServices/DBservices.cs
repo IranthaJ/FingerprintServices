@@ -301,5 +301,25 @@ namespace MyServices
 
             return ds;
         }
+
+        public List<DateTime> getAllHolidays(string connectionString)
+        {
+            List<DateTime> holidays = new List<DateTime>();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand("Select * from att_holidays Where YEAR ( holiday_date)  = YEAR(GETDATE())", con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            holidays.Add(reader.GetDateTime(1)); //Specify column index 
+                        }
+                    }
+                }
+            }
+            return holidays;
+        }
     }
 }
